@@ -1,15 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.HistoryController">
-    <children>
-        <TableView fx:id="table" layoutX="10" layoutY="10" prefWidth="760" prefHeight="420">
-            <columns>
-                <TableColumn fx:id="colId" text="ID" prefWidth="60" />
-                <TableColumn fx:id="colDate" text="Date" prefWidth="260" />
-                <TableColumn fx:id="colFiles" text="Fichiers" prefWidth="220" />
-                <TableColumn fx:id="colThreats" text="Menaces" prefWidth="220" />
-            </columns>
-        </TableView>
-    </children>
-</AnchorPane>
+<?import javafx.geometry.*?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.seb.clonekapersky.controller.HistoryController"
+            fitToWidth="true" fitToHeight="true"
+            style="-fx-background-color: transparent; -fx-background: transparent;">
+    
+    <VBox spacing="25" styleClass="content-pane">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+        </padding>
+        
+        <!-- En-tête avec titre -->
+        <HBox alignment="CENTER_LEFT" spacing="15">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label text="📊" style="-fx-font-size: 32px;" />
+                    <Label text="Historique des analyses" styleClass="title-large" />
+                </HBox>
+                <Label text="Consultez l'historique complet de toutes vos analyses" styleClass="text-gray" />
+            </VBox>
+        </HBox>
+        
+        <!-- Statistiques rapides avec design amélioré -->
+        <HBox spacing="20" alignment="CENTER" maxWidth="900">
+            <VBox styleClass="stat-box" spacing="10" alignment="CENTER" HBox.hgrow="ALWAYS">
+                <StackPane>
+                    <Region style="-fx-background-color: #E8F8F5; -fx-background-radius: 50; -fx-min-width: 60; -fx-min-height: 60;" />
+                    <Label text="📈" style="-fx-font-size: 32px;" />
+                </StackPane>
+                <Label text="Analyses totales" styleClass="stat-label" />
+                <Label fx:id="lblTotalScans" text="0" styleClass="stat-number" style="-fx-text-fill: #00A88E;" />
+                <Label text="depuis l'installation" styleClass="text-gray" style="-fx-font-size: 11px;" />
+            </VBox>
+            
+            <VBox styleClass="stat-box" spacing="10" alignment="CENTER" HBox.hgrow="ALWAYS">
+                <StackPane>
+                    <Region style="-fx-background-color: #F0F9F7; -fx-background-radius: 50; -fx-min-width: 60; -fx-min-height: 60;" />
+                    <Label text="📁" style="-fx-font-size: 32px;" />
+                </StackPane>
+                <Label text="Fichiers analysés" styleClass="stat-label" />
+                <Label fx:id="lblTotalFiles" text="0" styleClass="stat-number" style="-fx-text-fill: #1D1D1F;" />
+                <Label text="au total" styleClass="text-gray" style="-fx-font-size: 11px;" />
+            </VBox>
+            
+            <VBox styleClass="stat-box" spacing="10" alignment="CENTER" HBox.hgrow="ALWAYS">
+                <StackPane>
+                    <Region style="-fx-background-color: #FFF0F0; -fx-background-radius: 50; -fx-min-width: 60; -fx-min-height: 60;" />
+                    <Label text="⚠️" style="-fx-font-size: 32px;" />
+                </StackPane>
+                <Label text="Menaces détectées" styleClass="stat-label" />
+                <Label fx:id="lblTotalThreats" text="0" styleClass="stat-number" style="-fx-text-fill: #FF3B30;" />
+                <Label text="bloquées et isolées" styleClass="text-gray" style="-fx-font-size: 11px;" />
+            </VBox>
+        </HBox>
+        
+        <!-- Carte du tableau avec en-tête -->
+        <VBox styleClass="card" spacing="15" maxWidth="1200" prefHeight="350">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="📋 Historique détaillé" styleClass="title-small" />
+                    <Label text="Double-cliquez sur une ligne pour voir les détails" styleClass="text-gray" />
+                </VBox>
+            </HBox>
+            
+            <Separator />
+            
+            <TableView fx:id="table" styleClass="table-view" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="#" prefWidth="60" minWidth="50" maxWidth="80" />
+                    <TableColumn fx:id="colDate" text="📅 Date et heure" prefWidth="280" />
+                    <TableColumn fx:id="colFiles" text="📄 Fichiers analysés" prefWidth="200" />
+                    <TableColumn fx:id="colThreats" text="⚠️ Menaces trouvées" prefWidth="200" />
+                </columns>
+                <placeholder>
+                    <VBox alignment="CENTER" spacing="15" style="-fx-padding: 40;">
+                        <Label text="📊" style="-fx-font-size: 64px; -fx-opacity: 0.3;" />
+                        <Label text="Aucune analyse effectuée" style="-fx-font-size: 18px; -fx-text-fill: #1D1D1F; -fx-font-weight: 600;" />
+                        <Label text="Lancez votre première analyse" style="-fx-font-size: 14px; -fx-text-fill: #86868B;" />
+                    </VBox>
+                </placeholder>
+            </TableView>
+        </VBox>
+        
+        <!-- Légende informative -->
+        <HBox spacing="20" alignment="CENTER_LEFT" maxWidth="1200">
+            <!-- Info sur les lignes colorées -->
+            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="stat-box" HBox.hgrow="ALWAYS"
+                  style="-fx-padding: 15;">
+                <Region style="-fx-background-color: rgba(255, 59, 48, 0.1); -fx-min-width: 40; -fx-min-height: 40; -fx-background-radius: 8;" />
+                <VBox spacing="3">
+                    <Label text="Analyses avec menaces" style="-fx-font-weight: 600; -fx-font-size: 13px; -fx-text-fill: #FF3B30;" />
+                    <Label text="Les lignes colorées indiquent des menaces détectées" styleClass="text-gray" style="-fx-font-size: 11px;" />
+                </VBox>
+            </HBox>
+            
+            <!-- Info sur les analyses sûres -->
+            <HBox spacing="10" alignment="CENTER_LEFT" styleClass="stat-box" HBox.hgrow="ALWAYS"
+                  style="-fx-padding: 15;">
+                <Region style="-fx-background-color: rgba(0, 168, 142, 0.1); -fx-min-width: 40; -fx-min-height: 40; -fx-background-radius: 8;" />
+                <VBox spacing="3">
+                    <Label text="Analyses saines" style="-fx-font-weight: 600; -fx-font-size: 13px; -fx-text-fill: #00A88E;" />
+                    <Label text="Aucune menace détectée lors de ces analyses" styleClass="text-gray" style="-fx-font-size: 11px;" />
+                </VBox>
+            </HBox>
+        </HBox>
+        
+        <!-- Conseil d'utilisation -->
+        <HBox spacing="15" alignment="CENTER_LEFT" maxWidth="1200" 
+              style="-fx-background-color: #F0F9F7; -fx-padding: 20; -fx-background-radius: 12; -fx-border-color: #00A88E; -fx-border-width: 1; -fx-border-radius: 12;">
+            <Label text="💡" style="-fx-font-size: 24px;" />
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="💡 Conseil de sécurité" style="-fx-font-weight: 700; -fx-text-fill: #00A88E; -fx-font-size: 15px;" />
+                <Label text="Il est recommandé d'effectuer une analyse complète au moins une fois par semaine pour maintenir votre système sécurisé." 
+                       style="-fx-text-fill: #1D1D1F; -fx-font-size: 13px;" wrapText="true" />
+            </VBox>
+        </HBox>
+        
+    </VBox>
+</ScrollPane>

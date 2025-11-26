@@ -1,14 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.SettingsController">
-    <children>
-        <VBox spacing="10" layoutX="20" layoutY="20">
-            <Label text="Paramètres" style="-fx-font-size:18px;" />
-            <HBox spacing="8">
-                <Label text="Thème" />
-                <ToggleButton fx:id="toggleTheme" onAction="#toggleThemeAction" text="Light" />
+<?import javafx.geometry.*?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.seb.clonekapersky.controller.SettingsController"
+            fitToWidth="true" fitToHeight="true"
+            style="-fx-background-color: transparent; -fx-background: transparent;">
+    
+    <VBox spacing="25" styleClass="content-pane">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+        </padding>
+        
+        <!-- En-tête -->
+        <HBox alignment="CENTER_LEFT" spacing="15">
+            <Label text="⚙️" style="-fx-font-size: 32px;" />
+            <VBox spacing="4">
+                <Label text="Paramètres" styleClass="title-large" />
+                <Label text="Personnalisez votre expérience de sécurité" styleClass="text-gray" />
+            </VBox>
+        </HBox>
+        
+        <!-- Section Apparence -->
+        <VBox styleClass="card" spacing="20" maxWidth="700">
+            <Label text="🎨 Apparence" styleClass="title-medium" />
+            <Separator />
+            
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Thème de l'interface" style="-fx-font-weight: 600; -fx-font-size: 15px;" />
+                    <Label text="Choisissez entre le mode clair et sombre" styleClass="text-gray" />
+                </VBox>
+                <ToggleButton fx:id="toggleTheme" text="☀️ Clair" onAction="#toggleThemeAction" 
+                             styleClass="toggle-button" prefWidth="120" />
             </HBox>
         </VBox>
-    </children>
-</AnchorPane>
+        
+        <!-- Section Protection -->
+        <VBox styleClass="card" spacing="20" maxWidth="700">
+            <Label text="🛡️ Protection" styleClass="title-medium" />
+            <Separator />
+            
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Protection en temps réel" style="-fx-font-weight: 600; -fx-font-size: 15px;" />
+                    <Label text="Analyse automatique des fichiers" styleClass="text-gray" />
+                </VBox>
+                <ToggleButton text="✓ Activé" selected="true" styleClass="toggle-button" 
+                             style="-fx-background-color: #00A88E; -fx-text-fill: white;" prefWidth="120" />
+            </HBox>
+            
+            <Separator />
+            
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Surveillance des téléchargements" style="-fx-font-weight: 600; -fx-font-size: 15px;" />
+                    <Label text="Vérifier les fichiers téléchargés" styleClass="text-gray" />
+                </VBox>
+                <ToggleButton text="✓ Activé" selected="true" styleClass="toggle-button" 
+                             style="-fx-background-color: #00A88E; -fx-text-fill: white;" prefWidth="120" />
+            </HBox>
+        </VBox>
+        
+        <!-- Section Analyses -->
+        <VBox styleClass="card" spacing="20" maxWidth="700">
+            <Label text="🔍 Analyses" styleClass="title-medium" />
+            <Separator />
+            
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Analyse programmée" style="-fx-font-weight: 600; -fx-font-size: 15px;" />
+                    <Label text="Analyse automatique quotidienne" styleClass="text-gray" />
+                </VBox>
+                <ToggleButton text="Désactivé" styleClass="toggle-button" prefWidth="120" />
+            </HBox>
+            
+            <Separator />
+            
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Profondeur d'analyse" style="-fx-font-weight: 600; -fx-font-size: 15px;" />
+                    <Label text="Niveau de détection des menaces" styleClass="text-gray" />
+                </VBox>
+                <HBox spacing="8">
+                    <Button text="Rapide" styleClass="btn-secondary" style="-fx-font-size: 12px; -fx-padding: 8 16;" />
+                    <Button text="Standard" styleClass="btn-primary" style="-fx-font-size: 12px; -fx-padding: 8 16;" />
+                    <Button text="Approfondi" styleClass="btn-secondary" style="-fx-font-size: 12px; -fx-padding: 8 16;" />
+                </HBox>
+            </HBox>
+        </VBox>
+        
+        <!-- Section À propos -->
+        <VBox styleClass="card" spacing="20" maxWidth="700">
+            <Label text="ℹ️ À propos" styleClass="title-medium" />
+            <Separator />
+            
+            <VBox spacing="10">
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <Label text="Version :" style="-fx-font-weight: 600; -fx-min-width: 150;" />
+                    <Label text="1.0-SNAPSHOT" styleClass="text-gray" />
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <Label text="Base de données :" style="-fx-font-weight: 600; -fx-min-width: 150;" />
+                    <Label text="26/11/2025" styleClass="text-gray" />
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <Label text="Licence :" style="-fx-font-weight: 600; -fx-min-width: 150;" />
+                    <Label text="Premium (expire 26/11/2026)" styleClass="text-success" />
+                </HBox>
+            </VBox>
+        </VBox>
+        
+    </VBox>
+</ScrollPane>

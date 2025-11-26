@@ -1,15 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.ScanController">
-    <children>
-        <VBox spacing="10" layoutX="20" layoutY="20">
-            <ProgressBar fx:id="progressBar" prefWidth="600" progress="0" />
-            <ListView fx:id="liveList" prefHeight="300" prefWidth="600" />
-            <HBox spacing="8">
-                <Button fx:id="btnSelectFolder" text="Choisir fichier" onAction="#selectFolder" />
-                <Label fx:id="lblStatus" text="Prêt" />
-            </HBox>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.seb.clonekapersky.controller.ScanController"
+      spacing="25">
+    
+    <!-- En-tête -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="🔍" style="-fx-font-size: 32px;" />
+        <VBox spacing="4">
+            <Label text="Analyse de fichiers" styleClass="title-large" />
+            <Label text="Sélectionnez un fichier ou dossier à analyser" styleClass="text-gray" />
         </VBox>
-    </children>
-</AnchorPane>
+    </HBox>
+    
+    <!-- Carte principale de scan -->
+    <VBox styleClass="card" spacing="20" maxWidth="800">
+        <!-- Statut de l'analyse -->
+        <HBox alignment="CENTER_LEFT" spacing="15">
+            <Region style="-fx-background-color: #00A88E; -fx-background-radius: 6; -fx-min-width: 6; -fx-min-height: 50;" />
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label fx:id="lblStatus" text="Prêt à analyser" styleClass="title-small" />
+                <Label text="Aucune analyse en cours" styleClass="text-gray" />
+            </VBox>
+            <Button fx:id="btnSelectFolder" text="📁 Choisir un fichier" onAction="#selectFolder" styleClass="btn-primary" />
+        </HBox>
+        
+        <Separator />
+        
+        <!-- Barre de progression -->
+        <VBox spacing="12">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Progression" styleClass="title-small" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label text="0%" style="-fx-text-fill: #00A88E; -fx-font-weight: 600;" />
+            </HBox>
+            <ProgressBar fx:id="progressBar" progress="0" prefHeight="12" maxWidth="Infinity" styleClass="progress-bar" />
+        </VBox>
+        
+        <Separator />
+        
+        <!-- Liste des fichiers analysés -->
+        <VBox spacing="12">
+            <Label text="📋 Fichiers analysés" styleClass="title-small" />
+            <ListView fx:id="liveList" prefHeight="300" styleClass="list-view">
+                <placeholder>
+                    <VBox alignment="CENTER" spacing="10">
+                        <Label text="🔍" style="-fx-font-size: 48px; -fx-opacity: 0.3;" />
+                        <Label text="Aucun fichier analysé" style="-fx-text-fill: #86868B;" />
+                    </VBox>
+                </placeholder>
+            </ListView>
+        </VBox>
+        
+        <!-- Résumé de l'analyse -->
+        <HBox spacing="20" alignment="CENTER">
+            <VBox spacing="5" alignment="CENTER" styleClass="stat-box" HBox.hgrow="ALWAYS">
+                <Label text="Fichiers" styleClass="text-gray" />
+                <Label text="0" style="-fx-font-size: 24px; -fx-font-weight: 700; -fx-text-fill: #1D1D1F;" />
+            </VBox>
+            <VBox spacing="5" alignment="CENTER" styleClass="stat-box" HBox.hgrow="ALWAYS">
+                <Label text="Menaces" styleClass="text-gray" />
+                <Label text="0" style="-fx-font-size: 24px; -fx-font-weight: 700; -fx-text-fill: #FF3B30;" />
+            </VBox>
+            <VBox spacing="5" alignment="CENTER" styleClass="stat-box" HBox.hgrow="ALWAYS">
+                <Label text="Nettoyés" styleClass="text-gray" />
+                <Label text="0" style="-fx-font-size: 24px; -fx-font-weight: 700; -fx-text-fill: #00A88E;" />
+            </VBox>
+        </HBox>
+    </VBox>
+    
+</VBox>

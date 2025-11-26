@@ -1,23 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.DashboardController">
+<?import javafx.geometry.Insets?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.seb.clonekapersky.controller.DashboardController"
+            styleClass="content-pane">
     <children>
-        <VBox spacing="12" layoutX="20" layoutY="20">
-            <HBox spacing="12">
-                <VBox spacing="6">
-                    <Label text="Menaces bloquées" />
-                    <Label fx:id="lblThreatsBlocked" style="-fx-font-size:24px; -fx-text-fill: #d1121e;" />
-                </VBox>
-                <VBox spacing="6">
-                    <Label text="Statut" />
-                    <Label fx:id="lblSystemStatus" style="-fx-font-size:18px;" />
+        <VBox spacing="20" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" 
+              AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+            
+            <!-- En-tête -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label text="🏠" style="-fx-font-size: 24px;"/>
+                <VBox>
+                    <Label text="Tableau de Bord" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                    <Label text="Vue d'ensemble de la protection" style="-fx-text-fill: #888888;"/>
                 </VBox>
             </HBox>
-            <HBox spacing="12">
-                <Button fx:id="btnQuickScan" text="Scan Rapide" onAction="#quickScan" />
-                <Button fx:id="btnFullScan" text="Scan Complet" onAction="#fullScan" />
-            </HBox>
+            
+            <!-- Cartes de statistiques -->
+            <GridPane hgap="15" vgap="15">
+                <!-- Carte Statut Système -->
+                <VBox spacing="10" styleClass="dashboard-card" GridPane.columnIndex="0" GridPane.rowIndex="0" 
+                      prefWidth="250" prefHeight="120">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="🛡️" style="-fx-font-size: 24px;"/>
+                        <Label text="Statut Système" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    </HBox>
+                    <Label fx:id="lblSystemStatus" text="Protégé" styleClass="status-protected"/>
+                    <Label text="Dernière analyse : Jamais" style="-fx-font-size: 11px; -fx-text-fill: #888888;"/>
+                </VBox>
+                
+                <!-- Carte Menaces Bloquées -->
+                <VBox spacing="10" styleClass="dashboard-card" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                      prefWidth="250" prefHeight="120">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="⚠️" style="-fx-font-size: 24px;"/>
+                        <Label text="Menaces Bloquées" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    </HBox>
+                    <HBox alignment="BASELINE_LEFT" spacing="5">
+                        <Label fx:id="lblThreatsBlocked" text="0" 
+                               style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #d1121e;"/>
+                        <Label text="menaces" style="-fx-text-fill: #888888;"/>
+                    </HBox>
+                    <Label text="Aujourd'hui" style="-fx-font-size: 11px; -fx-text-fill: #888888;"/>
+                </VBox>
+                
+                <!-- Carte Fichiers Analysés -->
+                <VBox spacing="10" styleClass="dashboard-card" GridPane.columnIndex="2" GridPane.rowIndex="0"
+                      prefWidth="250" prefHeight="120">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="📄" style="-fx-font-size: 24px;"/>
+                        <Label text="Fichiers Analysés" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    </HBox>
+                    <HBox alignment="BASELINE_LEFT" spacing="5">
+                        <Label fx:id="lblFilesScanned" text="0" 
+                               style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #0071bc;"/>
+                        <Label text="fichiers" style="-fx-text-fill: #888888;"/>
+                    </HBox>
+                    <Label text="Dernière session" style="-fx-font-size: 11px; -fx-text-fill: #888888;"/>
+                </VBox>
+            </GridPane>
+            
+            <!-- Boutons d'action -->
+            <VBox spacing="15">
+                <Label text="Actions Rapides" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                
+                <HBox spacing="15">
+                    <VBox spacing="8" styleClass="dashboard-card" prefWidth="370" prefHeight="100">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="⚡" style="-fx-font-size: 20px;"/>
+                            <VBox>
+                                <Label text="Analyse Rapide" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                                <Label text="Scanne les dossiers critiques (Downloads)" 
+                                       style="-fx-font-size: 11px; -fx-text-fill: #888888;"/>
+                            </VBox>
+                        </HBox>
+                        <Button fx:id="btnQuickScan" text="▶ Lancer l'analyse rapide" 
+                                onAction="#quickScan" styleClass="btn-primary" maxWidth="Infinity"/>
+                    </VBox>
+                    
+                    <VBox spacing="8" styleClass="dashboard-card" prefWidth="370" prefHeight="100">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="🔍" style="-fx-font-size: 20px;"/>
+                            <VBox>
+                                <Label text="Analyse Complète" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                                <Label text="Scanne les documents en profondeur" 
+                                       style="-fx-font-size: 11px; -fx-text-fill: #888888;"/>
+                            </VBox>
+                        </HBox>
+                        <Button fx:id="btnFullScan" text="▶ Lancer l'analyse complète" 
+                                onAction="#fullScan" styleClass="btn-secondary" maxWidth="Infinity"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Activité récente -->
+            <VBox spacing="10" styleClass="dashboard-card">
+                <Label text="📊 Activité Récente" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <ListView fx:id="activityList" prefHeight="150">
+                    <placeholder>
+                        <Label text="Aucune activité récente" style="-fx-text-fill: #888888;"/>
+                    </placeholder>
+                </ListView>
+            </VBox>
+            
         </VBox>
     </children>
 </AnchorPane>

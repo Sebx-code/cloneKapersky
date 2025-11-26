@@ -1,21 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.QuarantineController">
-    <children>
-        <VBox spacing="8" layoutX="10" layoutY="10" prefWidth="760" prefHeight="420">
-            <TableView fx:id="table" prefWidth="760" prefHeight="360">
-                <columns>
-                    <TableColumn fx:id="colId" text="ID" prefWidth="60" />
-                    <TableColumn fx:id="colFile" text="Fichier" prefWidth="380" />
-                    <TableColumn fx:id="colDate" text="Date" prefWidth="160" />
-                    <TableColumn fx:id="colHash" text="Hash" prefWidth="160" />
-                </columns>
-            </TableView>
-            <HBox spacing="8">
-                <Button text="Restaurer" onAction="#restoreSelected" />
-                <Button text="Supprimer" onAction="#deleteSelected" />
+<?import javafx.geometry.*?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.seb.clonekapersky.controller.QuarantineController"
+            fitToWidth="true" fitToHeight="true"
+            style="-fx-background-color: transparent; -fx-background: transparent;">
+    
+    <VBox spacing="25" styleClass="content-pane">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+        </padding>
+        
+        <!-- En-tête avec titre et actions -->
+        <HBox alignment="CENTER_LEFT" spacing="15">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <Label text="📦" style="-fx-font-size: 32px;" />
+                    <Label text="Quarantaine" styleClass="title-large" />
+                </HBox>
+                <Label text="Fichiers suspects isolés pour votre sécurité" styleClass="text-gray" />
+            </VBox>
+            
+            <HBox spacing="12">
+                <Button fx:id="btnRestore" text="♻️ Restaurer" onAction="#restoreSelected" styleClass="btn-secondary" />
+                <Button fx:id="btnDelete" text="🗑️ Supprimer" onAction="#deleteSelected" styleClass="btn-danger" />
             </HBox>
+        </HBox>
+        
+        <!-- Carte de statistiques rapides -->
+        <HBox spacing="20" maxWidth="900">
+            <VBox styleClass="stat-box" spacing="8" alignment="CENTER" HBox.hgrow="ALWAYS">
+                <Label text="📦" style="-fx-font-size: 28px;" />
+                <Label text="Fichiers en quarantaine" styleClass="stat-label" />
+                <Label fx:id="lblCount" text="0" styleClass="stat-number" style="-fx-text-fill: #FF9500;" />
+            </VBox>
+            
+            <VBox styleClass="stat-box" spacing="8" alignment="CENTER" HBox.hgrow="ALWAYS">
+                <Label text="🛡️" style="-fx-font-size: 28px;" />
+                <Label text="Protection" styleClass="stat-label" />
+                <Label text="Active" style="-fx-font-size: 20px; -fx-font-weight: 700; -fx-text-fill: #00A88E;" />
+            </VBox>
+            
+            <VBox styleClass="stat-box" spacing="8" alignment="CENTER" HBox.hgrow="ALWAYS">
+                <Label text="✓" style="-fx-font-size: 28px; -fx-text-fill: #00A88E;" />
+                <Label text="Système" styleClass="stat-label" />
+                <Label text="Sécurisé" style="-fx-font-size: 20px; -fx-font-weight: 700; -fx-text-fill: #00A88E;" />
+            </VBox>
+        </HBox>
+        
+        <!-- Carte du tableau -->
+        <VBox styleClass="card" spacing="15" maxWidth="1200" prefHeight="400">
+            <VBox spacing="8">
+                <Label text="📋 Liste des fichiers isolés" styleClass="title-small" />
+                <Label text="Double-cliquez sur une ligne pour voir les détails complets" styleClass="text-gray" />
+            </VBox>
+            
+            <Separator />
+            
+            <TableView fx:id="table" styleClass="table-view" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="60" minWidth="60" maxWidth="80" />
+                    <TableColumn fx:id="colFile" text="📄 Fichier original" prefWidth="450" />
+                    <TableColumn fx:id="colDate" text="📅 Date d'isolation" prefWidth="180" />
+                    <TableColumn fx:id="colHash" text="🔐 Signature (Hash)" prefWidth="200" />
+                </columns>
+                <placeholder>
+                    <VBox alignment="CENTER" spacing="15" style="-fx-padding: 40;">
+                        <Label text="✓" style="-fx-font-size: 64px; -fx-text-fill: #00A88E; -fx-opacity: 0.4;" />
+                        <Label text="Aucun fichier en quarantaine" style="-fx-font-size: 18px; -fx-text-fill: #1D1D1F; -fx-font-weight: 600;" />
+                        <Label text="Tous vos fichiers sont sûrs" style="-fx-font-size: 14px; -fx-text-fill: #86868B;" />
+                    </VBox>
+                </placeholder>
+            </TableView>
         </VBox>
-    </children>
-</AnchorPane>
+        
+        <!-- Informations d'aide -->
+        <HBox spacing="15" alignment="CENTER_LEFT" maxWidth="1200" 
+              style="-fx-background-color: #F0F9F7; -fx-padding: 20; -fx-background-radius: 12; -fx-border-color: #00A88E; -fx-border-width: 1; -fx-border-radius: 12;">
+            <Label text="ℹ️" style="-fx-font-size: 24px;" />
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="💡 À propos de la quarantaine" style="-fx-font-weight: 700; -fx-text-fill: #00A88E; -fx-font-size: 15px;" />
+                <Label text="Les fichiers suspects sont automatiquement isolés dans un environnement sécurisé." 
+                       style="-fx-text-fill: #1D1D1F; -fx-font-size: 13px;" wrapText="true" />
+                <Label text="• Restaurez un fichier si vous êtes certain qu'il est sûr" 
+                       style="-fx-text-fill: #1D1D1F; -fx-font-size: 13px;" />
+                <Label text="• Supprimez définitivement les fichiers confirmés comme malveillants" 
+                       style="-fx-text-fill: #1D1D1F; -fx-font-size: 13px;" />
+            </VBox>
+        </HBox>
+        
+    </VBox>
+</ScrollPane>

@@ -2,18 +2,51 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.MainController" stylesheets="/assets/kaspersky.css">
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.seb.clonekapersky.controller.MainController" 
+            stylesheets="@/assets/kaspersky.css">
+    
+    <!-- SIDEBAR GAUCHE -->
     <left>
-        <VBox spacing="12" styleClass="sidebar" alignment="TOP_CENTER" prefWidth="200" BorderPane.alignment="CENTER">
-            <Label text="Mini Antivirus" styleClass="app-title" />
-            <Button fx:id="btnDashboard" text="Dashboard" onAction="#showDashboard" styleClass="side-btn" />
-            <Button fx:id="btnScan" text="Scan" onAction="#showScan" styleClass="side-btn" />
-            <Button fx:id="btnQuarantine" text="Quarantine" onAction="#showQuarantine" styleClass="side-btn" />
-            <Button fx:id="btnHistory" text="History" onAction="#showHistory" styleClass="side-btn" />
-            <Button fx:id="btnSettings" text="Settings" onAction="#showSettings" styleClass="side-btn" />
+        <VBox spacing="0" styleClass="sidebar" alignment="TOP_LEFT" prefWidth="240" BorderPane.alignment="CENTER">
+            <!-- Logo/Titre -->
+            <VBox spacing="5" styleClass="app-title">
+                <padding>
+                    <Insets top="0" right="0" bottom="0" left="0" />
+                </padding>
+                <Label text="🛡️ Kaspersky" style="-fx-font-size: 24px; -fx-font-weight: 700; -fx-text-fill: #00A88E;" />
+                <Label text="Security" style="-fx-font-size: 16px; -fx-text-fill: #86868B;" />
+            </VBox>
+            
+            <Region VBox.vgrow="NEVER" minHeight="30" />
+            
+            <!-- Menu Items -->
+            <Button fx:id="btnDashboard" text="🏠  Accueil" onAction="#showDashboard" styleClass="side-btn,side-btn-active" />
+            <Button fx:id="btnScan" text="🔍  Analyse" onAction="#showScan" styleClass="side-btn" />
+            <Button fx:id="btnQuarantine" text="📦  Quarantaine" onAction="#showQuarantine" styleClass="side-btn" />
+            <Button fx:id="btnHistory" text="📊  Historique" onAction="#showHistory" styleClass="side-btn" />
+            <Button fx:id="btnSettings" text="⚙️  Paramètres" onAction="#showSettings" styleClass="side-btn" />
+            
+            <!-- Spacer -->
+            <Region VBox.vgrow="ALWAYS" />
+            
+            <!-- Licence Info en bas -->
+            <VBox spacing="6" styleClass="license-box">
+                <VBox.margin>
+                    <Insets top="0" right="15" bottom="20" left="15" />
+                </VBox.margin>
+                <Label text="✓ Licence Premium" styleClass="license-title" />
+                <Label text="Expire: 26/11/2026" styleClass="license-expiry" />
+                <Separator />
+                <Label text="Protection active" style="-fx-font-size: 11px; -fx-text-fill: #00A88E; -fx-font-weight: 600;" />
+            </VBox>
         </VBox>
     </left>
+    
+    <!-- CONTENU CENTRAL -->
     <center>
         <StackPane fx:id="contentPane" styleClass="content-pane" />
     </center>
+    
 </BorderPane>

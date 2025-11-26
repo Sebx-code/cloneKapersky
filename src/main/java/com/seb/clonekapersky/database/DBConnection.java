@@ -6,12 +6,13 @@ import java.sql.SQLException;
 
 /**
  * Singleton DB connection manager.
- * Configure the JDBC_URL, USER and PASS for your MySQL instance.
+ * Configuration pour MAMP.
  */
 public class DBConnection {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/mini_antivirus?useSSL=false&serverTimezone=UTC";
+    // ✅ Configuration MAMP
+    private static final String JDBC_URL = "jdbc:mysql://localhost:8889/mini_antivirus?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASS = "password";
+    private static final String PASS = "root"; // ← Mot de passe MAMP par défaut
 
     private static DBConnection instance;
 
@@ -31,6 +32,31 @@ public class DBConnection {
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(JDBC_URL, USER, PASS);
+        try {
+            Connection conn = DriverManager.getConnection(JDBC_URL, USER, PASS);
+            System.out.println("✓ Connexion MySQL MAMP réussie");
+            return conn;
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur de connexion MySQL MAMP: " + e.getMessage());
+            System.err.println("   URL: " + JDBC_URL);
+            System.err.println("   User: " + USER);
+            System.err.println("   Vérifiez que MAMP est démarré !");
+            throw e;
+        }
+    }
+    
+    /**
+     * Teste la connexion à la base de données
+     */
+    public static boolean testConnection() {
+        try {
+            Connection conn = getInstance().getConnection();
+            boolean valid = conn.isValid(2);
+            conn.close();
+            return valid;
+        } catch (SQLException e) {
+            System.err.println("Test de connexion échoué: " + e.getMessage());
+            return false;
+        }
     }
 }
