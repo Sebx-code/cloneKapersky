@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.ScanController">
+    <children>
+        <VBox spacing="10" layoutX="20" layoutY="20">
+            <ProgressBar fx:id="progressBar" prefWidth="600" progress="0" />
+            <ListView fx:id="liveList" prefHeight="300" prefWidth="600" />
+            <HBox spacing="8">
+                <Button fx:id="btnSelectFolder" text="Choisir fichier" onAction="#selectFolder" />
+                <Label fx:id="lblStatus" text="Prêt" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

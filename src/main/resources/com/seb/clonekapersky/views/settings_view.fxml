@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.SettingsController">
+    <children>
+        <VBox spacing="10" layoutX="20" layoutY="20">
+            <Label text="Paramètres" style="-fx-font-size:18px;" />
+            <HBox spacing="8">
+                <Label text="Thème" />
+                <ToggleButton fx:id="toggleTheme" onAction="#toggleThemeAction" text="Light" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

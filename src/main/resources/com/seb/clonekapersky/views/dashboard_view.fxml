@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.DashboardController">
+    <children>
+        <VBox spacing="12" layoutX="20" layoutY="20">
+            <HBox spacing="12">
+                <VBox spacing="6">
+                    <Label text="Menaces bloquées" />
+                    <Label fx:id="lblThreatsBlocked" style="-fx-font-size:24px; -fx-text-fill: #d1121e;" />
+                </VBox>
+                <VBox spacing="6">
+                    <Label text="Statut" />
+                    <Label fx:id="lblSystemStatus" style="-fx-font-size:18px;" />
+                </VBox>
+            </HBox>
+            <HBox spacing="12">
+                <Button fx:id="btnQuickScan" text="Scan Rapide" onAction="#quickScan" />
+                <Button fx:id="btnFullScan" text="Scan Complet" onAction="#fullScan" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

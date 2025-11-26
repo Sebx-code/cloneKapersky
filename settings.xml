@@ -1,0 +1,19 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <proxies>
+        <proxy>
+            <id>my-proxy</id>
+            <active>true</active>
+            <protocol>http</protocol>
+            <host>192.168.43.1</host>
+            <port>8080</port>
+            <!-- Décommentez ces lignes si votre proxy nécessite une authentification
+            <username>votre_username</username>
+            <password>votre_password</password>
+            <nonProxyHosts>localhost|127.0.0.1</nonProxyHosts>
+            -->
+        </proxy>
+    </proxies>
+</settings>

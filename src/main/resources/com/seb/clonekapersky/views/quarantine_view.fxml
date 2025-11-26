@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.QuarantineController">
+    <children>
+        <VBox spacing="8" layoutX="10" layoutY="10" prefWidth="760" prefHeight="420">
+            <TableView fx:id="table" prefWidth="760" prefHeight="360">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="60" />
+                    <TableColumn fx:id="colFile" text="Fichier" prefWidth="380" />
+                    <TableColumn fx:id="colDate" text="Date" prefWidth="160" />
+                    <TableColumn fx:id="colHash" text="Hash" prefWidth="160" />
+                </columns>
+            </TableView>
+            <HBox spacing="8">
+                <Button text="Restaurer" onAction="#restoreSelected" />
+                <Button text="Supprimer" onAction="#deleteSelected" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

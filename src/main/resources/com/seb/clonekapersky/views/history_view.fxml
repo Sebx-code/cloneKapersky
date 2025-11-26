@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.HistoryController">
+    <children>
+        <TableView fx:id="table" layoutX="10" layoutY="10" prefWidth="760" prefHeight="420">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="60" />
+                <TableColumn fx:id="colDate" text="Date" prefWidth="260" />
+                <TableColumn fx:id="colFiles" text="Fichiers" prefWidth="220" />
+                <TableColumn fx:id="colThreats" text="Menaces" prefWidth="220" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

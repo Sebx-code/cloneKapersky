@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seb.clonekapersky.controller.MainController" stylesheets="/assets/kaspersky.css">
+    <left>
+        <VBox spacing="12" styleClass="sidebar" alignment="TOP_CENTER" prefWidth="200" BorderPane.alignment="CENTER">
+            <Label text="Mini Antivirus" styleClass="app-title" />
+            <Button fx:id="btnDashboard" text="Dashboard" onAction="#showDashboard" styleClass="side-btn" />
+            <Button fx:id="btnScan" text="Scan" onAction="#showScan" styleClass="side-btn" />
+            <Button fx:id="btnQuarantine" text="Quarantine" onAction="#showQuarantine" styleClass="side-btn" />
+            <Button fx:id="btnHistory" text="History" onAction="#showHistory" styleClass="side-btn" />
+            <Button fx:id="btnSettings" text="Settings" onAction="#showSettings" styleClass="side-btn" />
+        </VBox>
+    </left>
+    <center>
+        <StackPane fx:id="contentPane" styleClass="content-pane" />
+    </center>
+</BorderPane>
